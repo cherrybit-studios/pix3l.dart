@@ -1,0 +1,15 @@
+name: pix3l
+description: A Dart wrapper for the PIX3L JavaScript SDK by Player3
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  meta: ^1.18.0
+
+dev_dependencies:
+  mocktail: ^1.0.4
+  test: ^1.30.0
+  very_good_analysis: ^10.2.0
