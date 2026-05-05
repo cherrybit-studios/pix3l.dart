@@ -1,23 +1,21 @@
 # pix3l.dart
 
-A Dart/Flutter wrapper around the [Pix3l JavaScript SDK](https://player3.gg/pix3l-sdk) by [Player3](https://player3.gg).
+A Dart/Flutter wrapper around the [PIX3L JavaScript SDK](https://player3.gg/pix3l-sdk) by [Player3](https://player3.gg).
 
 ## About
 
-[Pix3l](https://player3.gg/pix3l-sdk) is a JavaScript SDK that lets game developers integrate on-chain features — such as achievements, leaderboards, and digital asset ownership — directly into their games without requiring players to manage wallets or understand blockchain concepts.
+[PIX3L](https://player3.gg/pix3l-sdk) is a lightweight JavaScript API available inside the Player 3 embedded game environment. It gives your game secure access to player identity and a cloud save/load system.
 
-This package exposes the Pix3l SDK to Dart and Flutter applications, bridging the JS SDK so you can call its API from your Dart codebase using platform channels / JS interop.
+This package exposes the PIX3L SDK to Dart and Flutter applications, bridging the JS SDK so you can call its API from your Dart codebase using JS interop.
 
 ## How it works
 
-The Pix3l SDK works by embedding a lightweight JS layer in your game. Under the hood it communicates with the Player3 network to handle:
+The PIX3L SDK is injected into the Player 3 runtime automatically. You do not need to install any packages, add script tags, or configure anything. Under the hood it communicates with the Player 3 platform to handle:
 
-- **Player identity** – non-custodial, invisible wallets tied to a player's existing account.
-- **Achievements & quests** – award on-chain badges and track quest progress.
-- **Leaderboards** – globally verifiable, tamper-proof score boards.
-- **Digital ownership** – mint and transfer in-game items as NFTs.
+- **Player identity** – retrieve the authenticated player's ID, username, and avatar.
+- **Cloud saves** – persist and restore game state per player, per game, with named save slots.
 
-For full details see the [official Pix3l SDK documentation](https://player3.gg/pix3l-sdk#how-it-works).
+For full details see the [official PIX3L SDK documentation](https://player3.gg/pix3l-sdk).
 
 ## Getting started
 
@@ -32,6 +30,32 @@ Then run:
 
 ```sh
 flutter pub get
+```
+
+## Usage
+
+The PIX3L SDK is available automatically in the Player 3 runtime. No initialization is required.
+
+```dart
+import 'package:pix3l/pix3l.dart';
+
+// Get the authenticated player
+final player = await Pix3l.getPlayer();
+print(player.id);       // "a1b2c3d4-..."
+print(player.username); // "PixelNinja42"
+
+// Save game state
+await Pix3l.save(
+  {'level': 3, 'score': 7200},
+  slotKey: 'autosave',
+  schemaVersion: '1.2',
+);
+
+// Load game state
+final save = await Pix3l.load(slotKey: 'autosave');
+if (save != null) {
+  print(save['level']); // 3
+}
 ```
 
 ## License

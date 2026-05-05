@@ -10,9 +10,16 @@ void main() {
       expect(
         Pix3lPlayer(
           id: 'player-1',
-          displayName: 'Alice',
-          walletAddress: '0xABC',
+          username: 'Alice',
+          avatarUrl: 'https://example.com/avatar.png',
         ),
+        isNotNull,
+      );
+    });
+
+    test('can be instantiated with null fields', () {
+      expect(
+        Pix3lPlayer(id: 'player-1'),
         isNotNull,
       );
     });
@@ -20,13 +27,13 @@ void main() {
     test('equality', () {
       final a = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
       final b = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
 
       expect(a, equals(b));
@@ -35,13 +42,13 @@ void main() {
     test('inequality when fields differ', () {
       final a = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
       final b = Pix3lPlayer(
         id: 'player-2',
-        displayName: 'Bob',
-        walletAddress: '0xDEF',
+        username: 'Bob',
+        avatarUrl: 'https://example.com/bob.png',
       );
 
       expect(a, isNot(equals(b)));
@@ -50,13 +57,13 @@ void main() {
     test('hashCode is consistent with equality', () {
       final a = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
       final b = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
 
       expect(a.hashCode, equals(b.hashCode));
@@ -65,14 +72,14 @@ void main() {
     test('toString contains all fields', () {
       final player = Pix3lPlayer(
         id: 'player-1',
-        displayName: 'Alice',
-        walletAddress: '0xABC',
+        username: 'Alice',
+        avatarUrl: 'https://example.com/avatar.png',
       );
       final str = player.toString();
 
       expect(str, contains('player-1'));
       expect(str, contains('Alice'));
-      expect(str, contains('0xABC'));
+      expect(str, contains('https://example.com/avatar.png'));
     });
   });
 }
