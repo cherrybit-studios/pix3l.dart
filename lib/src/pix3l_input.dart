@@ -56,7 +56,9 @@ class Pix3lInput {
       callback(controllers.toDart.map(_toDartController).toList());
     }.toJS;
     final unsub = _sdk.onChange(jsCallback);
-    return unsub.callAsFunction;
+    return () {
+      unsub.callAsFunction();
+    };
   }
 
   static Pix3lController _toDartController(JSPix3lController js) {
