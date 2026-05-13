@@ -2,8 +2,10 @@ import 'dart:js_interop';
 
 import 'package:pix3l/src/js/pix3l_js.dart';
 import 'package:pix3l/src/models/player.dart';
+import 'package:pix3l/src/pix3l_input.dart';
 
 export 'package:pix3l/src/models/player.dart';
+export 'package:pix3l/src/pix3l_input.dart';
 
 /// {@template pix3l}
 /// A Dart wrapper for the PIX3L JavaScript SDK by Player3.
@@ -15,12 +17,18 @@ export 'package:pix3l/src/models/player.dart';
 /// final player = await Pix3l.getPlayer();
 /// await Pix3l.save({'level': 3, 'score': 7200});
 /// final save = await Pix3l.load();
+///
+/// // Gamepad input
+/// final controllers = Pix3l.input.getControllers();
 /// ```
 /// {@endtemplate}
 class Pix3l {
   Pix3l._();
 
   static final JSPix3l _sdk = PIX3L;
+
+  /// Provides access to the PIX3L gamepad input API.
+  static final Pix3lInput input = Pix3lInput();
 
   /// Returns information about the currently authenticated player.
   static Future<Pix3lPlayer> getPlayer() async {
