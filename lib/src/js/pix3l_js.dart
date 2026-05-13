@@ -1,5 +1,7 @@
 import 'dart:js_interop';
 
+import 'package:pix3l/src/js/pix3l_input_js.dart';
+
 /// The global PIX3L object exposed by the Player 3 runtime.
 @JS('PIX3L')
 extension type JSPix3l._(JSObject _) implements JSObject {
@@ -15,6 +17,9 @@ extension type JSPix3l._(JSObject _) implements JSObject {
   /// [state] must be a JSON-serializable object.
   /// [options] can include `slotKey` and `schemaVersion`.
   external JSPromise<JSAny?> save(JSAny state, [JSPix3lSaveOptions? options]);
+
+  /// Provides access to the PIX3L gamepad input API.
+  external JSPix3lInput get input;
 }
 
 /// Represents a player returned by the PIX3L SDK.

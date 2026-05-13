@@ -14,6 +14,7 @@ The PIX3L SDK is injected into the Player 3 runtime automatically. You do not ne
 
 - **Player identity** – retrieve the authenticated player's ID, username, and avatar.
 - **Cloud saves** – persist and restore game state per player, per game, with named save slots.
+- **Gamepad input** – read normalized controller state (buttons, sticks, triggers) with automatic detection and edge-state tracking.
 
 For full details see the [official PIX3L SDK documentation](https://player3.gg/pix3l-sdk).
 
@@ -56,6 +57,42 @@ final save = await Pix3l.load(slotKey: 'autosave');
 if (save != null) {
   print(save['level']); // 3
 }
+```
+
+### Gamepad Input
+
+Read normalized controller state inside your game loop:
+
+```dart
+// Get all connected controllers
+final controllers = Pix3l.input.getControllers();
+
+// Get the first controller
+final pad = Pix3l.input.getController();
+
+if (pad != null) {
+  if (pad.buttons.a.justPressed) {
+    player.jump();
+  }
+
+  // Move with left stick
+  player.x += pad.sticks.left.x * speed;
+  player.y += pad.sticks.left.y * speed;
+}
+```
+
+Subscribe to input changes:
+
+```dart
+final unsub = Pix3l.input.onChange((controllers) {
+  final pad = controllers.firstOrNull;
+  if (pad?.buttons.start.justPressed ?? false) {
+    togglePauseMenu();
+  }
+});
+
+// Later: stop listening
+unsub();
 ```
 
 ## License
