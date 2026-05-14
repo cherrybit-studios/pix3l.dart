@@ -56,6 +56,8 @@ class Pix3lInput {
       callback(controllers.toDart.map(_toDartController).toList());
     }.toJS;
     final unsub = _sdk.onChange(jsCallback);
+    // Tear-offs of external JS interop members are disallowed.
+    // ignore: unnecessary_lambdas
     return () {
       unsub.callAsFunction();
     };
