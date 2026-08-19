@@ -197,6 +197,29 @@ void main() {
       expect(a, equals(b));
     });
 
+    test('hashCode is consistent with equality', () {
+      final a = Pix3lLeaderboardEntry(
+        rank: 1,
+        score: 128400,
+        timeMs: 92350,
+        userId: 'user-1',
+        playerId: 'player-1',
+        username: 'PixelNinja42',
+        avatarUrl: 'https://example.com/avatar.png',
+      );
+      final b = Pix3lLeaderboardEntry(
+        rank: 1,
+        score: 128400,
+        timeMs: 92350,
+        userId: 'user-1',
+        playerId: 'player-1',
+        username: 'PixelNinja42',
+        avatarUrl: 'https://example.com/avatar.png',
+      );
+
+      expect(a.hashCode, equals(b.hashCode));
+    });
+
     test('toString contains all fields', () {
       final entry = Pix3lLeaderboardEntry(
         rank: 1,
@@ -259,6 +282,32 @@ void main() {
       expect(a, equals(b));
     });
 
+    test('hashCode is consistent with equality', () {
+      final entry = Pix3lLeaderboardEntry(
+        rank: 1,
+        score: 128400,
+        userId: 'user-1',
+        playerId: 'player-1',
+        username: 'PixelNinja42',
+      );
+      final a = Pix3lLeaderboardTopResult(
+        key: 'high_score',
+        scope: Pix3lLeaderboardScope.all,
+        limit: 10,
+        offset: 0,
+        entries: [entry],
+      );
+      final b = Pix3lLeaderboardTopResult(
+        key: 'high_score',
+        scope: Pix3lLeaderboardScope.all,
+        limit: 10,
+        offset: 0,
+        entries: [entry],
+      );
+
+      expect(a.hashCode, equals(b.hashCode));
+    });
+
     test('toString contains all fields', () {
       final result = Pix3lLeaderboardTopResult(
         key: 'high_score',
@@ -310,6 +359,21 @@ void main() {
       expect(a, equals(b));
     });
 
+    test('hashCode is consistent with equality', () {
+      final a = Pix3lLeaderboardMyRankResult(
+        rank: 1,
+        score: 128400,
+        totalEntries: 42,
+      );
+      final b = Pix3lLeaderboardMyRankResult(
+        rank: 1,
+        score: 128400,
+        totalEntries: 42,
+      );
+
+      expect(a.hashCode, equals(b.hashCode));
+    });
+
     test('toString contains all fields', () {
       final result = Pix3lLeaderboardMyRankResult(
         rank: 1,
@@ -352,6 +416,23 @@ void main() {
       );
 
       expect(a, equals(b));
+    });
+
+    test('hashCode is consistent with equality', () {
+      final a = Pix3lLeaderboardDefinition(
+        key: 'high_score',
+        name: 'High Score',
+        boardType: Pix3lLeaderboardType.score,
+        primaryMetric: Pix3lLeaderboardPrimaryMetric.score,
+      );
+      final b = Pix3lLeaderboardDefinition(
+        key: 'high_score',
+        name: 'High Score',
+        boardType: Pix3lLeaderboardType.score,
+        primaryMetric: Pix3lLeaderboardPrimaryMetric.score,
+      );
+
+      expect(a.hashCode, equals(b.hashCode));
     });
 
     test('toString contains all fields', () {
