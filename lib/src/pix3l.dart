@@ -3,9 +3,11 @@ import 'dart:js_interop';
 import 'package:pix3l/src/js/pix3l_js.dart';
 import 'package:pix3l/src/models/player.dart';
 import 'package:pix3l/src/pix3l_input.dart';
+import 'package:pix3l/src/pix3l_leaderboards.dart';
 
 export 'package:pix3l/src/models/player.dart';
 export 'package:pix3l/src/pix3l_input.dart';
+export 'package:pix3l/src/pix3l_leaderboards.dart';
 
 /// {@template pix3l}
 /// A Dart wrapper for the PIX3L JavaScript SDK by Player3.
@@ -29,6 +31,9 @@ class Pix3l {
 
   /// Provides access to the PIX3L gamepad input API.
   static final Pix3lInput input = Pix3lInput();
+
+  /// Provides access to the PIX3L leaderboards API.
+  static final Pix3lLeaderboards leaderboards = Pix3lLeaderboards();
 
   /// Returns information about the currently authenticated player.
   static Future<Pix3lPlayer> getPlayer() async {

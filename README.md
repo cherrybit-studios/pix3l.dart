@@ -15,6 +15,7 @@ The PIX3L SDK is injected into the Player 3 runtime automatically. You do not ne
 - **Player identity** – retrieve the authenticated player's ID, username, and avatar.
 - **Cloud saves** – persist and restore game state per player, per game, with named save slots.
 - **Gamepad input** – read normalized controller state (buttons, sticks, triggers) with automatic detection and edge-state tracking.
+- **Leaderboards** – submit scores and times, read global and friends rankings, and list board definitions.
 
 For full details see the [official PIX3L SDK documentation](https://player3.gg/pix3l-sdk).
 
@@ -93,6 +94,51 @@ final unsub = Pix3l.input.onChange((controllers) {
 
 // Later: stop listening
 unsub();
+```
+
+### Leaderboards
+
+Submit scores and times at the end of a run, then read rankings back:
+
+```dart
+// Submit a high score
+final result = await Pix3l.leaderboards.submitScore(
+  'high_score',
+  128400,
+  metadata: {'level': currentLevel},
+);
+
+if (result.improved) {
+  showToast('New personal best! Rank #${result.rank}');
+}
+
+// Submit a speedrun time (timeMs is in milliseconds)
+final timeResult = await Pix3l.leaderboards.submitTime(
+  'track_01_time',
+  runDuration.inMilliseconds,
+);
+
+// Read the top ten global entries
+final board = await Pix3l.leaderboards.top('high_score', limit: 10);
+for (final entry in board.entries) {
+  print('#${entry.rank} ${entry.username}: ${entry.score}');
+}
+
+// Show the player's standing among friends
+final me = await Pix3l.leaderboards.myRank(
+  'high_score',
+  scope: Pix3lLeaderboardScope.friends,
+);
+
+if (me.rank != null) {
+  print('You are #${me.rank} of ${me.totalEntries}');
+}
+
+// Build a leaderboard menu from the board catalog
+final boards = await Pix3l.leaderboards.list();
+for (final board in boards) {
+  addMenuEntry(board.name, () => showLeaderboard(board.key));
+}
 ```
 
 ## License
