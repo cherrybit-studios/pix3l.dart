@@ -3,3 +3,4 @@ library;
 
 export 'src/pix3l.dart';
 export 'src/pix3l_input.dart';
+export 'src/pix3l_leaderboards.dart';
