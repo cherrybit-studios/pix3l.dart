@@ -10,7 +10,8 @@ enum Pix3lLeaderboardScope {
   all('all'),
 
   /// Friends-only ranking.
-  friends('friends');
+  friends('friends')
+  ;
 
   const Pix3lLeaderboardScope(this.value);
 
@@ -32,7 +33,8 @@ enum Pix3lLeaderboardType {
   time('time'),
 
   /// Combined board that accepts both score and time.
-  both('both');
+  both('both')
+  ;
 
   const Pix3lLeaderboardType(this.value);
 
@@ -51,7 +53,8 @@ enum Pix3lLeaderboardPrimaryMetric {
   score('score'),
 
   /// Rank by time.
-  time('time');
+  time('time')
+  ;
 
   const Pix3lLeaderboardPrimaryMetric(this.value);
 
