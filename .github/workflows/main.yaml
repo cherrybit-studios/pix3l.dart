@@ -21,7 +21,7 @@ jobs:
   spell-check:
     permissions:
       contents: read
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v2
     with:
       includes: "**/*.md"
       modified_files_only: false
