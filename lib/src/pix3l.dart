@@ -2,10 +2,12 @@ import 'dart:js_interop';
 
 import 'package:pix3l/src/js/pix3l_js.dart';
 import 'package:pix3l/src/models/player.dart';
+import 'package:pix3l/src/pix3l_achievements.dart';
 import 'package:pix3l/src/pix3l_input.dart';
 import 'package:pix3l/src/pix3l_leaderboards.dart';
 
 export 'package:pix3l/src/models/player.dart';
+export 'package:pix3l/src/pix3l_achievements.dart';
 export 'package:pix3l/src/pix3l_input.dart';
 export 'package:pix3l/src/pix3l_leaderboards.dart';
 
@@ -22,6 +24,9 @@ export 'package:pix3l/src/pix3l_leaderboards.dart';
 ///
 /// // Gamepad input
 /// final controllers = Pix3l.input.getControllers();
+///
+/// // Achievements
+/// Pix3l.achievements.progress('coins_1000');
 /// ```
 /// {@endtemplate}
 class Pix3l {
@@ -34,6 +39,9 @@ class Pix3l {
 
   /// Provides access to the PIX3L leaderboards API.
   static final Pix3lLeaderboards leaderboards = Pix3lLeaderboards();
+
+  /// Provides access to the PIX3L achievements API.
+  static final Pix3lAchievements achievements = Pix3lAchievements();
 
   /// Returns information about the currently authenticated player.
   static Future<Pix3lPlayer> getPlayer() async {

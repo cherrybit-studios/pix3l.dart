@@ -16,6 +16,7 @@ The PIX3L SDK is injected into the Player 3 runtime automatically. You do not ne
 - **Cloud saves** – persist and restore game state per player, per game, with named save slots.
 - **Gamepad input** – read normalized controller state (buttons, sticks, triggers) with automatic detection and edge-state tracking.
 - **Leaderboards** – submit scores and times, read global and friends rankings, and list board definitions.
+- **Achievements** – report incremental or absolute progress, list achievements with player progress, and react to unlocks.
 
 For full details see the [official PIX3L SDK documentation](https://player3.gg/pix3l-sdk).
 
@@ -139,6 +140,39 @@ final boards = await Pix3l.leaderboards.list();
 for (final board in boards) {
   addMenuEntry(board.name, () => showLeaderboard(board.key));
 }
+```
+
+### Achievements
+
+Report progress from gameplay; Player 3 validates reports server-side and unlocks achievements automatically when their target is reached:
+
+```dart
+// Increment a counter (defaults to 1)
+Pix3l.achievements.progress('coins_1000');
+Pix3l.achievements.progress('coins_1000', amount: 25);
+
+// Boolean achievements unlock with a single report
+Pix3l.achievements.progress('first_boss');
+
+// Report an absolute value; the server keeps the maximum
+Pix3l.achievements.setProgress('high_score', score);
+
+// Render an achievements screen
+final achievements = await Pix3l.achievements.list();
+for (final achievement in achievements) {
+  print(
+    '${achievement.title} ${achievement.progress}/${achievement.target}',
+  );
+}
+
+// Celebrate unlocks
+final off = Pix3l.achievements.onUnlock((achievement) {
+  playSfx('fanfare');
+  showBanner('Unlocked: ${achievement.title}');
+});
+
+// Later: stop listening
+off();
 ```
 
 ## License
