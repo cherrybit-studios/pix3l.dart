@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 
+import 'package:pix3l/src/js/pix3l_achievements_js.dart';
 import 'package:pix3l/src/js/pix3l_input_js.dart';
 import 'package:pix3l/src/js/pix3l_leaderboards_js.dart';
 
@@ -24,6 +25,9 @@ extension type JSPix3l._(JSObject _) implements JSObject {
 
   /// Provides access to the PIX3L leaderboards API.
   external JSPix3lLeaderboards get leaderboards;
+
+  /// Provides access to the PIX3L achievements API.
+  external JSPix3lAchievements get achievements;
 }
 
 /// Represents a player returned by the PIX3L SDK.
